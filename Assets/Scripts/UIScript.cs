@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
-    
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Slider volumerSlider;
     public void OnStart()
     {
         SceneManager.LoadScene("OutdoorsScene");
@@ -16,9 +19,21 @@ public class UIScript : MonoBehaviour
         Debug.Log("quit");
     }
 
-    public void OnSettings()
+    public void OnBack()
     {
-        SceneManager.LoadScene("SettingsScene");
+        SceneManager.LoadScene("MenuScene");
+    }
+
+    public void OnOptions()
+    {
+        SceneManager.LoadScene("OptionsScene");
+    }
+
+    public void SetMusicVolume()
+    {
+        float volume = volumerSlider.value;
+        mixer.SetFloat("master", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("musicVolume", volume);
     }
 
 }
