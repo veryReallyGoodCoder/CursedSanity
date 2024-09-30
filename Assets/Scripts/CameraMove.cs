@@ -25,7 +25,7 @@ public class CameraMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         currentX += Input.GetAxis("Mouse X") * sensivity * Time.deltaTime;
